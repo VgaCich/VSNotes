@@ -1,0 +1,7 @@
+*.dcu
+*.~*
+*.map
+*.log
+*.exe
+*.vsn
+*.bak

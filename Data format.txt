@@ -1,0 +1,14 @@
+File:     
+[Magic: 4 = 'VSN1'][RootNode: Node]
+
+Node:  
+[NodeSize: 4][StreamsCount: 2][NameLen: 1][MetadataLen: 2][Name: NameLen][Metadata: MetadataLen]{StreamsCount[Stream: Stream]}{ChildCount[Child: Node]}
+
+Metadata: list of CRLF-separated key=value pairs
+
+Stream:
+[DataSize: 4][DataCRC32: 4][Compression: 1][NameLen: 1][MIMETypeLen: 1][Name: NameLen][MIMEType: MIMETypeLen][Data: DataSize]
+
+Data:
+Compression=dcNone: Raw stream
+Compression=dcNRV2E0..dcNRV2E10: NRV2EStream (for reference: [UncompressedSize: 4]{Ceil(UncompressedSize/64KB)[BlockSize: 2][Block: BlockSize]}; Block: BlockSize = 0? [RawData: 64KB] : [NRV2E-CompressedData: BlockSize])
