@@ -1,5 +1,7 @@
 unit StreamsEditor;
 
+//TODO: progressbar
+
 interface
 
 uses
