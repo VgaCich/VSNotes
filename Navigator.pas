@@ -126,6 +126,7 @@ begin
   for Btn := Low(TTBButtons) to High(TTBButtons) do
     ToolBar.ButtonAdd(TBButtons[Btn].Caption, TBButtons[Btn].ImageIndex);
   NodeTree := TTreeViewEx.Create(Self);
+  NodeTree.Style := NodeTree.Style or TVS_EDITLABELS or TVS_SHOWSELALWAYS;
   //NodeTree.CanvasInit;
   NodeTree.Images := FNodeImages;
   NodeTree.SetPosition(0, ToolBar.Height);
