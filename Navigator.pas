@@ -83,13 +83,13 @@ const
   IDToggle = IDDelete + 1;
   IDSort = IDToggle + 1;
   MenuNavi: array[0..8] of PChar = ('9001',
-    'Refresh',
+    'Refresh'#9'F5',
     '-',
-    'Add',
-    'Add child',
-    'Rename',
-    'Properties',
-    'Delete',
+    'Add'#9'F7',
+    'Add child'#9'F8',
+    'Rename'#9'F2',
+    'Properties'#9'F3',
+    'Delete'#9'Del',
     'Toggle');
   IDSortAlphaAsc = 10001;
   IDSortAlphaDesc = IDSortAlphaAsc + 1;

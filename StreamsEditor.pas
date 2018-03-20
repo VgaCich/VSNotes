@@ -75,12 +75,12 @@ const
   IDMIMEType = IDDelete + 1;
   IDCompression = IDMIMEType + 1;
   MenuList: array[0..7] of PChar = ('15001',
-    'Refresh',
+    'Refresh'#9'F5',
     '-',
-    'Add',
-    'Save',
-    'Rename',
-    'Delete',
+    'Add'#9'F7',
+    'Save'#9'F8',
+    'Rename'#9'F2',
+    'Delete'#9'Del',
     'MIME Type');
   IDMenuCompression = 16000;
   MenuCompression: array[0..0] of PChar = ('16001');
