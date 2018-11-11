@@ -9,7 +9,7 @@ unit Navigator;
 interface
 
 uses
-  Windows, CommCtrl, Messages, AvL, avlNatCompare, TreeViewEx, DataNode, NodeTag;
+  Windows, CommCtrl, Messages, AvL, avlNatCompare, avlTreeViewEx, DataNode, NodeTag;
 
 type
   TCompFunc = function(const S1, S2: string): Integer;

@@ -5,7 +5,7 @@ unit StreamsEditor;
 interface
 
 uses
-  Windows, Messages, CommCtrl, ShellAPI, AvL, avlUtils, ListViewEx,
+  Windows, Messages, CommCtrl, ShellAPI, AvL, avlUtils, avlListViewEx,
   NotesFile, DataNode, Editor;
 
 type
