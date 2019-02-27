@@ -5,6 +5,7 @@ interface
 //TODO: Tabulation settings
 //TODO: save cursor position in each node (in meta or tag? dunno)
 //TODO: TWebBrowser, maybe?
+//TODO: Accept dragged files
 
 uses
   Windows, Messages, CommCtrl, RichEdit, AvL, RichEditW, NotesFile, DataNode, Editor;
@@ -44,7 +45,6 @@ begin
   inherited;
   FTBImages := TImageList.Create;
   FTBImages.AddMasked(LoadImage(hInstance, 'TBTEXTEDITOR', IMAGE_BITMAP, 0, 0, 0), clFuchsia);
-  FontCombo := TComboBox.Create(Self, csDropDown);
   ToolBar := TToolBar.Create(Self, true);
   ToolBar.Style := ToolBar.Style or TBSTYLE_TOOLTIPS or CCS_TOP;
   ToolBar.ExStyle := ToolBar.ExStyle or TBSTYLE_EX_MIXEDBUTTONS;
@@ -54,7 +54,8 @@ begin
   ToolBar.Images := FTBImages;
   for Btn := Low(TTBButtons) to High(TTBButtons) do
     ToolBar.ButtonAdd(TBButtons[Btn].Caption, TBButtons[Btn].ImageIndex);
-  FontCombo.SetBounds(ToolBar.Left + 2, ToolBar.Top + (ToolBar.Height - FontCombo.Height) div 2, ToolBar.Indent - 4, FontCombo.Height);
+  FontCombo := TComboBox.Create(ToolBar, csDropDownList);
+  FontCombo.SetBounds(0, 0, ToolBar.Indent, ToolBar.Height);
   RichEdit := TRichEditW.Create(Self, '', true);
   RichEdit.SetPosition(0, ToolBar.Height);
   OnResize := Resize;

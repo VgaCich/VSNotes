@@ -28,6 +28,7 @@ type
     procedure SaveStreams;
     procedure SaveStream(const FileName: string; Stream: TDataStream);
     procedure SetCompression(Compression: string);
+    procedure SetMIMEType(const MIMEType: string);
     procedure UpdateComprList;
     procedure UpdateList;
     procedure WMCommand(var Msg: TWMCommand); message WM_COMMAND;
@@ -55,6 +56,7 @@ const
   SFilter = 'All files|*.*';
   SConfirmDelete = 'Delete attachment "%s"?';
   SConfirmMulDelete = 'Delete selected attachments?';
+  SAskMIMEType = 'Enter MIME type:';
   TBButtons: array[TTBButtons] of record Caption: string; ImageIndex: Integer; end = (
     (Caption: 'Add'; ImageIndex: 0),
     (Caption: 'Save'; ImageIndex: 1),
@@ -318,6 +320,13 @@ begin
 end;
 
 procedure TStreamsEditor.WMCommand(var Msg: TWMCommand);
+
+  function AskMIMEType: string;
+  begin
+    if not InputQuery(Handle, AppCaption, SAskMIMEType, Result) then
+      Result := '';
+  end;
+
 var
   Cur: TPoint;
   Compr: string;
@@ -327,7 +336,7 @@ begin
       tbAdd: AddStreams;
       tbSave: SaveStreams;
       tbDelete: DeleteStreams;
-      tbMIMEType: ShowMessage('Not implemented'); //TODO
+      tbMIMEType: SetMIMEType(AskMIMEType);
       tbCompression: begin
         GetCursorPos(Cur);
         UpdateComprList;
@@ -345,7 +354,7 @@ begin
       IDSave: SaveStreams;
       IDRename: StreamsList.Perform(LVM_EDITLABEL, StreamsList.SelectedIndex, 0);
       IDDelete: DeleteStreams;
-      IDMIMEType: ShowMessage('Not implemented'); //TODO
+      IDMIMEType: SetMIMEType(AskMIMEType);
       IDMenuCompression .. IDMenuCompression + 256: begin
         SetLength(Compr, GetMenuString(CompressionMenu.Handle, Msg.ItemID, nil, 0, MF_BYCOMMAND));
         GetMenuString(CompressionMenu.Handle, Msg.ItemID, PChar(Compr), Length(Compr) + 1, MF_BYCOMMAND);
@@ -424,6 +433,24 @@ begin
     Stream := TDataStream(StreamsList.ItemObject[StreamsList.Selected[i]]);
     if not Assigned(Stream) then Continue;
     Stream.Compression := Compression;
+    DoModify := true;
+  end;
+  if DoModify then
+    Modify;
+end;
+
+procedure TStreamsEditor.SetMIMEType(const MIMEType: string);
+var
+  i: Integer;
+  Stream: TDataStream;
+  DoModify: Boolean;
+begin
+  DoModify := false;
+  for i := 0 to StreamsList.SelCount - 1 do
+  begin
+    Stream := TDataStream(StreamsList.ItemObject[StreamsList.Selected[i]]);
+    if not Assigned(Stream) then Continue;
+    Stream.MIMEType := MIMEType;
     DoModify := true;
   end;
   if DoModify then

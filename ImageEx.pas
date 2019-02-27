@@ -9,8 +9,10 @@ type
   EImageEx = class (Exception) end;
   TImageEx = class(TImage)
   private
-
+    FImageWidth, FImageHeight: Cardinal;
+    procedure Resize(Sender: TObject);
   public
+    constructor Create(Parent: TWinControl);
     procedure Clear;
     procedure LoadFromStream(Stream: TStream);
   end;
@@ -28,6 +30,13 @@ begin
 end;
 
 { TImageEx }
+
+constructor TImageEx.Create(Parent: TWinControl);
+begin
+  inherited;
+  Style := Style or SS_REALSIZEIMAGE or SS_CENTERIMAGE;
+  OnResize := Resize;
+end;
 
 procedure TImageEx.Clear;
 begin
@@ -47,9 +56,38 @@ begin
   TIStreamAdapter.Create(Stream).GetInterface(IStream, StreamAdapter);
   GDIPBitmap := nil;
   if not CheckStatus(GdipCreateBitmapFromStream(StreamAdapter, GDIPBitmap)) then Exit;
-  Clear;
-  if not CheckStatus(GdipCreateHBITMAPFromBitmap(GDIPBitmap, Bitmap, clBlack)) then Exit;
-  BitmapHandle := Bitmap;
+  try
+    Clear;
+    if not CheckStatus(GdipCreateHBITMAPFromBitmap(GDIPBitmap, Bitmap, clBlack)) then Exit;
+    GdipGetImageWidth(GDIPBitmap, FImageWidth);
+    GdipGetImageHeight(GDIPBitmap, FImageHeight);
+    BitmapHandle := Bitmap;
+    SetSize(FImageWidth, FImageHeight);
+  finally
+    GdipDisposeImage(GDIPBitmap);
+  end;
+end;
+
+procedure TImageEx.Resize(Sender: TObject);
+var
+  ScrollInfo: TScrollInfo;
+begin
+  with ScrollInfo do
+  begin
+    cbSize := SizeOf(ScrollInfo);
+    fMask := SIF_PAGE or SIF_RANGE;
+    nMin := 0;
+    nMax := FImageHeight;
+    nPage := ClientHeight;
+  end;
+  SetScrollInfo(Handle, SB_VERT, ScrollInfo, true);
+  with ScrollInfo do
+  begin
+    nMax := FImageWidth;
+    nPage := ClientWidth;
+  end;
+  SetScrollInfo(Handle, SB_HORZ, ScrollInfo, true);
+  ScrollWindowEx(Handle, FImageWidth - ClientWidth, FImageHeight - ClientHeight, nil, nil, 0, nil, 0);
 end;
 
 end.

@@ -61,9 +61,17 @@ const
   SFileDoesntExists = 'File "%s" doesn''t exists';
   SInvalidFile = 'Invalid file';
   FileMagic: Cardinal = $314E5356;
-  KnownExtensions: array[0..1] of record Ext, MIMEType: string end = (
+  KnownExtensions: array[0..8] of record Ext, MIMEType: string end = (
     (Ext: '.txt'; MIMEType: SMTPlainText),
-    (Ext: '.rtf'; MIMEType: SMTRTFText));
+    (Ext: '.rtf'; MIMEType: SMTRTFText),
+    (Ext: '.bmp'; MIMEType: 'image/bmp'),
+    (Ext: '.gif'; MIMEType: 'image/gif'),
+    (Ext: '.jpg'; MIMEType: 'image/jpeg'),
+    (Ext: '.jpeg'; MIMEType: 'image/jpeg'),
+    (Ext: '.png'; MIMEType: 'image/png'),
+    (Ext: '.tif'; MIMEType: 'image/tiff'),
+    (Ext: '.tiff'; MIMEType: 'image/tiff')
+  );
 
 function IsVSNFile(const FileName: string): Boolean;
 var
