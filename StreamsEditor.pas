@@ -445,6 +445,7 @@ var
   Stream: TDataStream;
   DoModify: Boolean;
 begin
+  if MIMEType = '' then Exit;
   DoModify := false;
   for i := 0 to StreamsList.SelCount - 1 do
   begin

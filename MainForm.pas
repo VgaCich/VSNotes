@@ -67,8 +67,8 @@ const
   CRLF = #13#10;
   AboutIcon = 'MAINICON';
   AboutCaption = 'About ';
-  AboutText = 'VgaSoft Notes 1.0'+CRLF+CRLF+
-              'Copyright '#169' VgaSoft, 2015'+CRLF+
+  AboutText = 'VgaSoft Notes 1.0 alpha'+CRLF+CRLF+
+              'Copyright '#169' VgaSoft, 2015-2019'+CRLF+
               'vgasoft@gmail.com';
   IDMenuFile = 1000;
   IDNew = IDMenuFile + 1;

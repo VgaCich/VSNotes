@@ -88,11 +88,9 @@ procedure TImagesEditor.ImagesListChange(Sender: TObject);
 var
   Stream: TDataStream;
 begin
-  if ImagesList.ItemCount = 0 then
-    Exit;
+  if ImagesList.ItemCount = 0 then Exit;
   Stream := FNode.Streams.ItemByName[ImagesList.Items[ImagesList.ItemIndex]];
-  if not Assigned(Stream) then
-    Exit;
+  if not Assigned(Stream) then Exit;
   Stream.Data.Position := 0;
   Image.LoadFromStream(Stream.Data);
   Resize(Self);
