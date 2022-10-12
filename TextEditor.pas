@@ -6,6 +6,7 @@ interface
 //TODO: save cursor position in each node (in meta or tag? dunno)
 //TODO: TWebBrowser, maybe?
 //TODO: Accept dragged files
+//TODO: Autopaste
 
 uses
   Windows, Messages, CommCtrl, RichEdit, AvL, RichEditW, NotesFile, DataNode, Editor;
