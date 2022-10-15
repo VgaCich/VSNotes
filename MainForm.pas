@@ -3,6 +3,7 @@ unit MainForm;
 //TODO: Service functions:
 //Autopaste
 //Directory capture (listing, .diz, etc)
+//TODO: Multiple files in tree? MDI?
 
 interface
 

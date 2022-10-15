@@ -5,6 +5,7 @@ unit Navigator;
 //TODO: Drag'n'Drop: nodes expanding, scrolling, reordering by dnd
 //TODO: Insertion/Importing and Exporting of hives
 //TODO: Mass operations on nodes (setting compression for all (or selected - as :nodetext) streams of all selected nodes, for example)
+//TODO: Collapsing on '/' button
 
 interface
 
